@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  app:
+    image: yansoares/bernoulli-app
+    container_name: challenge-php
+    working_dir: /app
+    ports:
+      - 8088:80
+    volumes:
+      - .:/app
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+      - PHP_DATE_TIMEZONE=America/Sao_Paulo
+      - PHP_DISPLAY_ERRORS=1
+      - php.error_reporting=E_ALL
+
+  mysqlsrv:
+    image: mysql:5.7
+    env_file:
+      - .env
+    ports:
+      - 3306:3306
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  mysqldata:
