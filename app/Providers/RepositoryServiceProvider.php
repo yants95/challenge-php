@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\External\Implementations\MockyAuthorizationService;
+use App\External\Interfaces\AuthorizationServiceInterface;
+
 use App\Repositories\Implementations\TransactionRepository;
 use App\Repositories\Interfaces\TransactionRepositoryInterface;
 
@@ -25,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
         $this->app->bind(WalletRepositoryInterface::class, WalletRepository::class);
         $this->app->bind(TransactionServiceInterface::class, TransactionService::class);
+        $this->app->bind(AuthorizationServiceInterface::class, MockyAuthorizationService::class);
     }
 
     /**
