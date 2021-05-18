@@ -16,8 +16,8 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->decimal('value');
-            $table->integer('transaction_type');
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('payer')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('payee')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
