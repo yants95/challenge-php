@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -22,16 +21,17 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $userType = random_int(0,1);
-        $documentId = ($userType) ? $this->faker->cnpj(false) : $this->faker->cpf(false);
+        $faker = \Faker\Factory::create('pt_BR');
+
+        $userType = random_int(1, 2);
+        $cpfCnpj = $userType == 1 ? $faker->cpf : $faker->cnpj;
 
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'user_type' => $userType,
-            'document_id' => $documentId,
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'remember_token' => Str::random(10),
+            'cpf_cnpj' => $cpfCnpj,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
         ];
     }
 }
