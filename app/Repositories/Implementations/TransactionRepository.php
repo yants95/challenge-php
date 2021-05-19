@@ -7,15 +7,15 @@ use App\Repositories\Interfaces\TransactionRepositoryInterface;
 
 class TransactionRepository implements TransactionRepositoryInterface
 {
-    private $transactionModel;
+    private $transaction;
 
     public function __construct()
     {
-        $this->transactionModel = new Transaction();
+        $this->transaction = new Transaction();
     }
 
     public function create(array $data)
     {
-        return $this->transactionModel->create($data);
+        return $this->transaction->create($data);
     }
 }
