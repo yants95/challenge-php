@@ -9,7 +9,10 @@ use App\Repositories\Implementations\TransactionRepository;
 use App\Repositories\Interfaces\TransactionRepositoryInterface;
 
 use App\Repositories\Interfaces\WalletRepositoryInterface;
-use App\Repositories\WalletRepository;
+use App\Repositories\Implementations\WalletRepository;
+
+use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\Implementations\UserRepository;
 
 use App\Services\Implementations\TransactionService;
 use App\Services\Interfaces\TransactionServiceInterface;
@@ -29,6 +32,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(WalletRepositoryInterface::class, WalletRepository::class);
         $this->app->bind(TransactionServiceInterface::class, TransactionService::class);
         $this->app->bind(AuthorizationServiceInterface::class, MockyAuthorizationService::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**
