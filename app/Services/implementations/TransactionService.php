@@ -44,7 +44,7 @@ class TransactionService implements TransactionServiceInterface
             $payeeWallet = $this->walletRepository->getWalletByUser($data->payee);
 
             if (!$this->userRepository->checkPayerType($payerWallet->user_id)) {
-                return ResponseMessage::create(400, "Ops! Shopkeerper's cannot do transfers.");
+                return ResponseMessage::create(400, "Ops! Shopkeepers cannot do transfers.");
             }
 
             if (!$this->walletRepository->getSufficientWalletAmount($payerWallet, $data->value)) {
