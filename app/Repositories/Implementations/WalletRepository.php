@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Implementations;
 
 use App\Models\Wallet;
 use App\Repositories\Interfaces\WalletRepositoryInterface;
@@ -18,18 +18,20 @@ class WalletRepository implements WalletRepositoryInterface
         return $this->wallet->find($userId);
     }
 
-    public function getSufficientWalletAmount($amountTransfer)
+    public function getSufficientWalletAmount(Wallet $payerWallet, $amountTransfer)
     {
-        return $this->wallet->amount >= $amountTransfer;
+        return $payerWallet->amount >= $amountTransfer;
     }
 
     public function increaseAmount(Wallet $wallet, $amount)
     {
-        return $wallet->amount += $amount;
+        $wallet->amount += $amount;
+        return $wallet->save();
     }
 
     public function decreaseAmount(Wallet $wallet, $amount)
     {
-        return $wallet->amount -= $amount;
+        $wallet->amount -= $amount;
+        return $wallet->save();
     }
 }
