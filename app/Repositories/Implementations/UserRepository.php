@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Implementations;
 
-use App\Enums\UserType;
+use App\Enum\UserType;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 
