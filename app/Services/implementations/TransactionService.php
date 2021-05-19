@@ -33,9 +33,9 @@ class TransactionService implements TransactionServiceInterface
     {
         try {
             $transaction = [
-                'user_id' => $data->user_id,
                 'value' => $data->value,
-                'transaction_type' => $data->transaction_type
+                'payer' => $data->payer,
+                'payee' => $data->payee,
             ];
 
             DB::beginTransaction();
@@ -47,7 +47,7 @@ class TransactionService implements TransactionServiceInterface
                 return ResponseMessage::create(400, "Ops! Shopkeerper's cannot do transfers.");
             }
 
-            if (!$this->walletRepository->getSufficientWalletAmount($data->value)) {
+            if (!$this->walletRepository->getSufficientWalletAmount($payerWallet, $data->value)) {
                 return ResponseMessage::create(400, "Insufficient funds");
             }
 
