@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Response\ResponseMessage;
 use App\Services\Interfaces\TransactionServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -19,10 +20,9 @@ class TransactionController extends Controller
     public function handle(Request $request)
     {
         try {
-            $transaction = $this->transactionService->makeTransaction($request);
-            return $transaction;
+            return $this->transactionService->makeTransaction($request);
         } catch (\Exception $e) {
-            Log::info($e->getMessage());
+            return ResponseMessage::create(500, $e->getMessage());
         }
     }
 }
