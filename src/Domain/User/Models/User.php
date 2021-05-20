@@ -2,6 +2,7 @@
 
 namespace Domain\User\Models;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,4 +22,9 @@ class User extends Authenticatable
         'cpf_cnpj',
         'user_type'
     ];
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
+    }
 }
