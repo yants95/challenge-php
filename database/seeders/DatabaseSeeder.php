@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Domain\Wallet\Models\Wallet;
+use Domain\User\Models\User;
 
 use Illuminate\Database\Seeder;
 
@@ -15,12 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = \Domain\User\Models\User::factory(10)->create();
+        $users = User::factory(10)->create();
 
         foreach ($users as $user) {
             Wallet::create([
                 'user_id' => $user->id,
-                'amount' => 1000000
+                'amount' => 100000
             ]);
         }
     }
