@@ -34,6 +34,12 @@ class TransactionService implements TransactionServiceInterface
     public function makeTransaction($data)
     {
         try {
+            $transaction = [
+                'value' => $data->value,
+                'payer' => $data->payer,
+                'payee' => $data->payee
+            ];
+
             $payerWallet = $this->walletRepository->getWalletByUser($data->payer);
             $payeeWallet = $this->walletRepository->getWalletByUser($data->payee);
 
@@ -51,7 +57,7 @@ class TransactionService implements TransactionServiceInterface
 
             DB::beginTransaction();
 
-            $this->transactionRepository->create($data);
+            $this->transactionRepository->create($transaction);
 
             $this->walletRepository->increaseAmount($payeeWallet, $data->value);
             $this->walletRepository->decreaseAmount($payerWallet, $data->value);
